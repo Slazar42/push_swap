@@ -6,8 +6,15 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:10:05 by slazar            #+#    #+#             */
-/*   Updated: 2023/04/17 09:10:09 by slazar           ###   ########.fr       */
+/*   Updated: 2023/04/20 21:32:54 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	swap_a_b_ss(t_stacks *st)
+{
+	swap_a_sa(st);
+	swap_b_sb(st);
+	
+}

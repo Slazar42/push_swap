@@ -6,11 +6,13 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 08:59:27 by slazar            #+#    #+#             */
-/*   Updated: 2023/04/17 09:01:41 by slazar           ###   ########.fr       */
+/*   Updated: 2023/04/20 08:52:25 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+#include "push_swap.h"
+
+char	*ft_substr(char *s, unsigned int start, int len)
 {
 	unsigned char	*sbs;
 	int			i;
@@ -35,7 +37,7 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	return ((char *)sbs);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*ptr;
 	int	len;
@@ -54,7 +56,7 @@ char	*ft_strdup(const char *s1)
 	return (ptr - len);
 }
 
-int	word(char const *s, char c)
+int	word(char *s, char c)
 {
 	int	i;
 	int	count;
@@ -73,7 +75,7 @@ int	word(char const *s, char c)
 	return (count);
 }
 
-int	len_word(const char *s, char c, int i)
+int	len_word(char *s, char c, int i)
 {
 	int	len_s;
 
@@ -86,7 +88,7 @@ int	len_word(const char *s, char c, int i)
 	return (len_s);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**tab;
 	int		len_s;

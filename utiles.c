@@ -11,7 +11,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(const char *str)
+#include "push_swap.h"
+
+int	ft_atoi(char *str)
 {
 	int	result;
 	int	s;
@@ -36,7 +38,7 @@ int	ft_atoi(const char *str)
 	return (result * s);
 }
 
-char	*ft_substr(char const *s, unsigned int start, int len)
+char	*ft_substr(char *s, unsigned int start, int len)
 {
 	unsigned char	*sbs;
 	int			i;
@@ -61,7 +63,7 @@ char	*ft_substr(char const *s, unsigned int start, int len)
 	return ((char *)sbs);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	char	*ptr;
 	int	len;
@@ -95,4 +97,33 @@ char	*ft_calloc(int count, int size)
 		i++;
 	}
 	return (result);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*cnc;
+	int		i;
+
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	cnc = (char *)malloc(ft_strlen(s1) + ft_strlen(s2) + 2);
+	if (!cnc)
+		return (0);
+	while (*s1)
+	{
+		cnc[i] = *s1;
+		s1++;
+		i++;
+	}
+	cnc[i++] = ' ';
+	while (*s2)
+	{
+		cnc[i] = *s2;
+		s2++;
+		i++;
+	}
+	cnc[i] = 0;
+	free(s1);
+	return (cnc);
 }

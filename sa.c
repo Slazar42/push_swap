@@ -6,8 +6,17 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/04/17 09:09:57 by slazar           ###   ########.fr       */
+/*   Updated: 2023/04/20 09:12:39 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	swap_a(t_stacks *st)
+{
+	int	tmp;
+
+	tmp = st->a[1];
+	st->a[1] = st->a[0];
+	st->a[0] = tmp;
+}
