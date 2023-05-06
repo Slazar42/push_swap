@@ -43,7 +43,7 @@ ${NAME}:    ${OBJS}
 
 ${NAMEBONUS}:	${OBJSB}
 			@echo "\033[0;32m"
-			${CC} push_swap.h${CFLAGS} ${OBJSB} -o ${NAMEBONUS}
+			${CC} push_swap.h ${CFLAGS} ${OBJSB} -o ${NAMEBONUS}
 
 bonus:     ${NAMEBONUS}
 

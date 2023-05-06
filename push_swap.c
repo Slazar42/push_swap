@@ -38,7 +38,7 @@ int main(int ac, char **av)
 {
 	// t_stacks ps;
 
-	static char	*all;
+	char	*all;
 	int		i;
 
 	i = 0;
