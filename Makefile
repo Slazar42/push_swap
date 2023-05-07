@@ -17,8 +17,6 @@ SRCS = utiles.c \
 		sb.c \
 		ra.c \
 		rb.c \
-		sb.c \
-		sa.c \
 		ss.c \
 		rrr.c \
 		rra.c \

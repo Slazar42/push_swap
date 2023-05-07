@@ -12,9 +12,9 @@
 
 #include "push_swap.h"
 
-void	swap_a_b_ss(t_stacks *st)
-{
-	swap_a_sa(st);
-	swap_b_sb(st);
+// void	swap_a_b_ss(t_stacks *st)
+// {
+// 	swap_a_sa(st);
+// 	swap_b_sb(st);
 	
-}
+// }
