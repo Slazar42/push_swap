@@ -28,7 +28,7 @@ void	ft_check(char *str,int *n)
 			i++;
 		if(str[i] == '\0' && nbr == 0)
 			ft_error();		
-		if((str[i] == '-'  || str[i] == '+') && i++ && !(str[i] >= '0' && str[i] <= '9' ) || str[i] == '\0')
+		if((str[i] == '-'  || str[i] == '+') && i++ && !(str[i] >= '0' && str[i] <= '9') || !str[i])
 			ft_error();
 		while(str[i] >= '0' && str[i] <= '9')
 				{
@@ -108,7 +108,7 @@ int main(int ac, char **av)
 	i = 0;
 	int n = 0;
 	s.top_b = -1;
-	if (ac >= 1)
+	if (ac > 1)
 	{
 		i++;
 		while (i < ac)
@@ -121,20 +121,15 @@ int main(int ac, char **av)
 		s.b = malloc (n * sizeof(int));
 		// printf("%s\n",all);
 		ft_atoiin(all, s.a,n-1);
-		i=0;
-		for(int j = n-1;j>=0;j--)
+		// printf("%d\n",s.top_a);
+		if (s.top_a == 2)
+			sort_3(&s);
+		else if(s.top_a <= 4)
+			sort_5(&s);
+
+		for(int j = s.top_a;j>=0;j--)
 			{printf("%d\n",s.a[j]);}
-		swap_a(&s);
-			{printf("\n88888888888888888888888888888888888888888888888888888888888888888888888\n");}
-		for(int j = n-1;j>=0;j--)
-			{printf("%d\n",s.a[j]);}
-		ra(&s);
-			{printf("\n88888888888888888888888888888888888888888888888888888888888888888888888\n");}
-		for(int j = n-1;j>=0;j--)
-			{printf("%d\n",s.a[j]);}
-		// if(n  <= 99)
-		// 	ft_sort(&s);
-		// ft_big(&s);
+		// printf("%d", smallest(&s,0));
 		return(0);
 	}
 }
