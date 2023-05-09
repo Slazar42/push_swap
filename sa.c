@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/04/20 09:12:39 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/09 18:07:54 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ void	ra(t_stacks *st)
 {
 	int tmp;
 	int k;
-	k = st->top_a;
 	if(st->top_a > 1)
 	{
+		k = st->top_a;
 		tmp = st->a[st->top_a];
 		while (k > 0)
 		{
@@ -55,9 +55,9 @@ void	rb(t_stacks *st)
 {
 	int tmp;
 	int k;
-	k = st->top_b;
 	if(st->top_b > 1)
 	{
+		k = st->top_b;
 		tmp = st->a[st->top_b];
 		while (k > 0)
 		{
@@ -138,7 +138,76 @@ void	ss(t_stacks *st)
 	}
 	write(1, "ss\n", 3);
 }
+void	rr(t_stacks *st)
+{
+	int tmp;
+	int k;
+	if(st->top_a > 1)
+	{
+		k = st->top_a;
+		tmp = st->a[st->top_a];
+		while (k > 0)
+		{
+			st->a[k]=st->a[k-1];
+			k--;
+		}
+		st->a[k] = tmp;
+	}
+	if (st->top_b > 1)
+	{
+		k = st->top_b;
+		tmp = st->a[st->top_b];
+		while (k > 0)
+		{
+			st->b[k]=st->b[k-1];
+			k--;
+		}
+		st->b[k] = tmp;
+	}
+	write(1, "rr\n", 3);
+}
 
+void	rrr(t_stacks *st)
+{
+	int	tmp;
+	int	i;
+
+	i = 0;
+	tmp = st->a[i];
+	while (i < st->top_a)
+	{
+		st->a[i] = st->a[i + 1];
+		i++;
+	}
+	st->a[i] = tmp;
+	i = 0;
+	tmp = st->b[i];
+	while (i < st->top_b)
+	{
+		st->b[i] = st->b[i + 1];
+		i++;
+	}
+	st->b[i] = tmp;
+	write(1, "rrr\n", 4);
+}
+int *sorted_arr(int *arr,int top)
+{
+	int i;
+	int temp;
+	i = 0;
+	while(i <= top)
+	{
+		if(arr[i] < arr[i + 1])
+		{
+			temp = arr[i];
+			arr[i] = arr[i +1];
+			arr[i + 1]= temp;
+			i = 0;
+		}
+		i++; 
+	}
+	return(arr);
+}
 int 	biggest(t_stacks *s,int n)
 {
 	static int big;

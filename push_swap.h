@@ -20,6 +20,7 @@ int 	biggest(t_stacks *s,int n);
 char    *ft_substr(char *s, unsigned int start, int len);
 // int     ft_atoi(char *str);
 char	*ft_strdup(char *s1);
+int *sorted_arr(int *arr,int top);
 int		smallest(t_stacks *s,int n);
 char	*ft_calloc(int count, int size);
 // char	**ft_split(char *s, char c);
@@ -39,6 +40,8 @@ int		ft_strlen(char *c);
 void	ra(t_stacks *st);
 void	pa(t_stacks *st);
 void	sa(t_stacks *st);
+void	rr(t_stacks *st);
+void	rrr(t_stacks *st);
 void	sb(t_stacks *st);
 int	biggest(t_stacks *st,int n);
 
