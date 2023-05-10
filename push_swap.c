@@ -98,6 +98,13 @@ void *ft_atoiin(char *str,int *arr,int n)
 	if(n >= 0)
 		ft_atoiin(str,arr,n-1);
 }
+// void	ft_range(t_stacks	*s)
+// {
+// 	int	*sorted_arr;
+	
+// 	sorted_arr = sorted_arr(s.a,s->top_a);
+
+// }
 int main(int ac, char **av)
 {
 	t_stacks s;
@@ -119,20 +126,20 @@ int main(int ac, char **av)
 		s.top_a = n-1;
 		s.a = malloc (n * sizeof(int));
 		s.b = malloc (n * sizeof(int));
-		// printf("%s\n",all);
 		ft_atoiin(all, s.a,n-1);
-		sorted_arr(s.a,s.top_a);
-		// printf("%d\n",s.top_a);
-		// if (s.top_a == 2)
-		// 	sort_3(&s);
-		// else if(s.top_a <= 4)
-		// 	sort_5(&s);
+		printf("%d\n",biggest(&s,0));
+		exit(0);
+		// sorted_arr(s.a,s.top_a);
+		if (sorted_or_not(&s))
+			exit(0);
+		if (s.top_a == 2)
+			sort_3(&s);
+		else if(s.top_a <= 4)
+			sort_5(&s);
 		// else if(s.top_a > 4)
-		// 	range(&s);
+		// 	ft_range(&s);
 		// for(int j = s.top_a;j>=0;j--)
 		// 	{printf("%d\n",s.a[j]);}
-
-		// printf("%d", smallest(&s,0));
 		return(0);
 	}
 }

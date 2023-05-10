@@ -212,13 +212,17 @@ int 	biggest(t_stacks *s,int n)
 {
 	static int big;
 	static int i;
+	if(!n)
+		big = s->a[n];
+
+	// big = s->a[0];
 	if (s->a[n] > big)
 		{
 			big = s->a[n];
 			i = n;
 		}
-	if(n <= s->top_a )
-		biggest(s,++n);
+	if(++n <= s->top_a )
+		biggest(s,n);
 	return(i);
 }
 
@@ -259,14 +263,42 @@ void sort_3(t_stacks *s)
 	int small;
 	big = biggest(s,0);
 	small = smallest(s,0);
-	if(small == 1)
-		sa(s);
-	else if(big == 2)
-		ra(s);
-	else if(big == 1)
-		rra(s);
-	if(!sorted_or_not(s))
-		sort_3(s);
+	
+
+
+
+
+
+	
+	// if(sa(s) && sorted_or_not(s)) 
+	// 	exit(0);
+	// else if (ra(s) && sorted_or_not(s))
+	// 	exit(0);
+	// else if (rra(s) && sorted_or_not(s))
+	// 	exit(0);
+	// if (sa(s) && rra(s))
+	// 	exit (0);
+	// else
+	// 	{ra(s);
+		//  ra(s);}
+
+	
+		
+	// if(small == s->top_a -1) 
+	// 	sa(s);
+	// else if (small == 0)
+	// 	rra(s);
+	// else if(big == 1)
+	// 	rra(s);
+
+	// else if (small - s->top_a >= small +1)
+	// 	ra(s);
+	// else if (small - s->top_a < small)
+	// 	rra(s);
+	// else if(small == 1)
+	// 	sa(s);
+	// if(!sorted_or_not(s))
+	// 	sort_3(s);
 }
 
 void	sort_5(t_stacks *s)
