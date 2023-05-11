@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 07:52:32 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/09 02:37:27 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/10 19:22:12 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,8 +127,7 @@ int main(int ac, char **av)
 		s.a = malloc (n * sizeof(int));
 		s.b = malloc (n * sizeof(int));
 		ft_atoiin(all, s.a,n-1);
-		printf("%d\n",biggest(&s,0));
-		exit(0);
+		// printf("%d\n",biggest(&s,0));
 		// sorted_arr(s.a,s.top_a);
 		if (sorted_or_not(&s))
 			exit(0);
@@ -138,8 +137,8 @@ int main(int ac, char **av)
 			sort_5(&s);
 		// else if(s.top_a > 4)
 		// 	ft_range(&s);
-		// for(int j = s.top_a;j>=0;j--)
-		// 	{printf("%d\n",s.a[j]);}
 		return(0);
+		for(int j = s.top_a;j>=0;j--)
+			{printf("%d\n",s.a[j]);}
 	}
 }
