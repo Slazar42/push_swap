@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/11 18:12:15 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/13 04:09:36 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,7 @@ void	sa(t_stacks *st)
 		write(1, "sa\n", 3);
 	}
 }
-void	ft_sa(t_stacks *st)
-{
-	int	tmp;
-	if( st->top_a > 1)
-	{
-		tmp = st->a[st->top_a];
-		st->a[st->top_a ] = st->a[st->top_a -1];
-		st->a[st->top_a -1] = tmp;
-	}
-}
+
 void	sb(t_stacks *st)
 {
 	int	tmp;
@@ -42,22 +33,6 @@ void	sb(t_stacks *st)
 		st->a[st->top_b ] = st->a[st->top_b -1];
 		st->a[st->top_b -1] = tmp;
 		write(1, "sb\n", 3);
-	}
-}
-void	ft_ra(t_stacks *st)
-{
-	int tmp;
-	int k;
-	if(st->top_a > 1)
-	{
-		k = st->top_a;
-		tmp = st->a[st->top_a];
-		while (k > 0)
-		{
-			st->a[k]=st->a[k-1];
-			k--;
-		}
-		st->a[k] = tmp;
 	}
 }
 
@@ -130,20 +105,6 @@ void	rra(t_stacks *st)
 	}
 	st->a[i] = tmp;
 	write(1, "rra\n", 4);
-}
-void	ft_rra(t_stacks *st)
-{
-	int	tmp;
-	int	i;
-
-	i = 0;
-	tmp = st->a[i];
-	while (i < st->top_a)
-	{
-		st->a[i] = st->a[i + 1];
-		i++;
-	}
-	st->a[i] = tmp;
 }
 
 void	rrb(t_stacks *st)
@@ -242,47 +203,68 @@ int *sorted_arr(int *arr,int top)
 		if(arr[i] < arr[i + 1])
 		{
 			temp = arr[i];
-			arr[i] = arr[i +1];
-			arr[i + 1]= temp;
-			i = 0;
+			arr[i] = arr[i + 1];
+			arr[i + 1] = temp;
+			i = -1;
 		}
-		i++; 
+		i++;
 	}
 	return(arr);
 }
-int 	biggest(t_stacks *s,int n)
-{
-	static int big;
-	static int i;
-	if(!n)
-		big = s->a[n];
-	if (s->a[n] > big)
-		{
-			big = s->a[n];
-			i = n;
-		}
-	if(++n <= s->top_a )
-		biggest(s,n);
-	return(i);
-}
 
-int		smallest(t_stacks *s,int n)
+// int 	biggest(int a)
+// {
+// 	static int big;
+// 	static int i;
+// 	if(!n)
+// 		big = s->a[n];
+// 	if (s->a[n] > big)
+// 		{
+// 			big = s->a[n];
+// 			i = n;
+// 		}
+// 	if(++n <= s->top_a )
+// 		biggest(s,n);
+// 	return(i);
+// }
+
+int		smallest(int *a,int top)
 {
 	int small;
 	int i;
-
-	small = s->a[n];
-	while (n <= s->top_a)
+		
+	i = 0;
+	small = a[i];
+	while (i <= top)
 	{
-		if (s->a[n] < small)
-		{
-			i = n;
-			small = s->a[n];
-		} 
-		n++;
+		if (a[i] < small)
+			small = a[i];
+		i++;
 	}
-	return(i);
+	return(i - top);
 }
+
+int		biggest(int *a,int top)
+{
+	int big;
+	int i;
+	int t;
+		
+	i = 0;
+	t = 0;
+	big = a[top];
+	while (i <= top)
+	{
+		if (a[i] >= big)
+			{
+				big = a[i];
+				t = i;
+			}
+		i++;
+	}
+	return(t);
+}
+
 
 int sorted_or_not(t_stacks *s)
 {
@@ -296,137 +278,43 @@ int sorted_or_not(t_stacks *s)
 	}
 	return(1);
 }
-t_stack st_copy(t_stacks *s)
-{
-	int i ;
-	t_stacks s_copy;
-	s_copy.a = malloc(sizeof(t_stack));
-	s_copy.top_a = s->top_a;
-	i = 0;
-	while (i < s->top_a)
-	{
-		s_copy.a[i] = s->a[i];
-		i++; 
-	}
-	return(s_copy);
-}
-void check_rra_sa(t_stacks scd )
-{
-	ft_rra(s);
-	if(sorted_or_not(s))
-	{
-		write(1,"rra\n",4);
-		exit(0);
-	}
-	ft_sa(s);
-	if(sorted_or_not(s))
-	{
-		write(1,"rra\nsa\n",8);
-		exit(0);
-	}
-	ft_sa(s);
-	ft_ra(s);
-}
-void check_sa(t_stacks s,t_stacks s_copy)
-{
-	ft_sa(s);
-	if(sorted_or_not(s))
-	{
-		write(1,"sa\n",4);
-		exit(0);
-	}
-	ft_sa(s);
-}
-
+	
 void sort_3(t_stacks *s)
 {
-	// int big;
-	// int small;
-	// big = biggest(s,0);
-	// small = smallest(s,0);	
-	
-	
-	if(check_rra_sa(s,s_copy))
-		
-
-
-
-
-
-
-	
-	ft_rra(s);
+	if(biggest(s->a,s->top_a) == 1)
+		rra(s);
 	if(sorted_or_not(s))
+		exit(0);
+	else if ((biggest(s->a,s->top_a) == 0))
 	{
-		write(1,"rra\n",4);
+		sa(s);
 		exit(0);
 	}
-	ft_sa(s);
+	if(biggest(s->a,s->top_a) == 2)
+		ra(s);
 	if(sorted_or_not(s))
-	{
-		write(1,"rra\nsa\n",8);
 		exit(0);
-	}
-	ft_sa(s);
-	ft_ra(s);
-	ft_ra(s);
-	if(sorted_or_not(s))
+	else if (biggest(s->a,s->top_a) == 0)
 	{
-		write(1,"ra\n",4);
-		exit(0);
+		ra(s);
+		exit(0)	;		
 	}
-	ft_rra(s);
-	ft_sa(s);
-	if(sorted_or_not(s))
-	{
-		write(1,"sa\n",4);
-		exit(0);
-	}
-	ft_sa(s);
-	ra(s);
-	ra(s);
-
-	// else if (ra(s) && sorted_or_not(s))
-	// 	exit(0);
-	// else if (rra(s) && sorted_or_not(s))
-	// 	exit(0);
-	// if (sa(s) && rra(s))
-	// 	exit (0);
-	// else
-	// 	{ra(s);
-	// 	 ra(s);}
-
-	
-		
-	// if(small == s->top_a -1) 
-	// 	sa(s);
-	// else if (small == 0)
-	// 	rra(s);
-	// else if(big == 1)
-	// 	rra(s);
-
-	// else if (small - s->top_a >= small +1)
-	// 	ra(s);
-	// else if (small - s->top_a < small)
-	// 	rra(s);
-	// else if(small == 1)
-	// 	sa(s);
-	// if(!sorted_or_not(s))
-	// 	sort_3(s);
+	sa(s);
+	exit(0);
 }
 
 void	sort_5(t_stacks *s)
 {
 	while (s->top_a > 2)
 	{
-		if(smallest(s,0) <= s->top_a / 2)
+		if(smallest(s->a,s->top_a) <= s->top_a / 2)
 		{
-			while (s->top_a != smallest(s,0))
+			while (s->top_a != smallest(s->a,s->top_a))
 				ra(s);
 		}
-		else if(smallest(s,0) > s->top_a / 2)
+		else if(smallest(s->a,s->top_a) > s->top_a / 2)
 		{
-			while (s->top_a != smallest(s,0))
+			while (s->top_a != smallest(s->a,s->top_a))
 				rra(s);
 		}
 		pa(s);

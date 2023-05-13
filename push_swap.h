@@ -15,13 +15,13 @@ typedef struct stacks
 
 void sort_3(t_stacks *s);
 void sort_5(t_stacks *s);
-int		smallest(t_stacks *s,int n);
-int 	biggest(t_stacks *s,int n);
+// int		smallest(t_stacks *s,int n);
+// int 	biggest(t_stacks *s,int n);
 char    *ft_substr(char *s, unsigned int start, int len);
 // int     ft_atoi(char *str);
 char	*ft_strdup(char *s1);
 int *sorted_arr(int *arr,int top);
-int		smallest(t_stacks *s,int n);
+// int		smallest(t_stacks *s,int n);
 char	*ft_calloc(int count, int size);
 // char	**ft_split(char *s, char c);
 char	*ft_strjoin(char *s1, char *s2);
@@ -42,9 +42,12 @@ void	ra(t_stacks *st);
 void	pa(t_stacks *st);
 void	sa(t_stacks *st);
 void	rr(t_stacks *st);
+void	rb(t_stacks *st);
+void	rrb(t_stacks *st);
+void	pb(t_stacks *st);
 void	rrr(t_stacks *st);
 void	sb(t_stacks *st);
-int	biggest(t_stacks *st,int n);
-
+int		biggest(int *a,int top);
+int		smallest(int *a,int top);
 
 #endif

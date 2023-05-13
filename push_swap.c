@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 07:52:32 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/10 19:22:12 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/13 04:08:04 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,54 @@ void *ft_atoiin(char *str,int *arr,int n)
 	if(n >= 0)
 		ft_atoiin(str,arr,n-1);
 }
-// void	ft_range(t_stacks	*s)
-// {
-// 	int	*sorted_arr;
+int i_in_stack(int nb,int *stack,int top)
+{
+	int i;
 	
-// 	sorted_arr = sorted_arr(s.a,s->top_a);
-
-// }
+	i = 0;
+	while (nb != stack[i++]);
+	return(top - i);
+}
+void	ft_range(t_stacks	*s)
+{
+	int range;
+	int indice;
+	int *sorted;
+	sorted = sorted_arr(s->a,s->top_a);
+	if (s->top_a <= 100)
+		range = 15;
+	while(s->top_a >= 0)
+	{
+		indice = i_in_stack(s->a[s->top_a],sorted,s->top_a);
+		if(indice < range)
+		{
+			pa(s);
+			rb(s);
+			range++;
+		}
+		else if ((indice >= range - 15) && (indice <= range))
+		{
+			pa(s);
+			range++;
+		}
+		else if (indice > range)
+			ra(s);
+	}
+	int x; 
+	// printf("%d",s->top_b);
+	// exit(0);
+	while (s->top_b >= 0)
+	{
+		x = biggest(s->b,s->top_b);
+		printf("===========================%d\n",x);
+		if(x == 0)
+			pb(s);
+		else if(x < s->top_b / 2)
+			rrb(s);
+		else if(x > s->top_b / 2)
+			rb(s);
+	}
+}
 int main(int ac, char **av)
 {
 	t_stacks s;
@@ -115,6 +156,7 @@ int main(int ac, char **av)
 	i = 0;
 	int n = 0;
 	s.top_b = -1;
+	
 	if (ac > 1)
 	{
 		i++;
@@ -127,7 +169,8 @@ int main(int ac, char **av)
 		s.a = malloc (n * sizeof(int));
 		s.b = malloc (n * sizeof(int));
 		ft_atoiin(all, s.a,n-1);
-		// printf("%d\n",biggest(&s,0));
+		// printf("%d\n",i_in_stack(33,s.a,s.top_a));
+		// exit (0);
 		// sorted_arr(s.a,s.top_a);
 		if (sorted_or_not(&s))
 			exit(0);
@@ -135,10 +178,12 @@ int main(int ac, char **av)
 			sort_3(&s);
 		else if(s.top_a <= 4)
 			sort_5(&s);
-		// else if(s.top_a > 4)
-		// 	ft_range(&s);
+		// exit(0);
+		else if(s.top_a > 4)
+			ft_range(&s);
+		// printf("\n%d\n", s.top_a);
+		// while(s.top_a-- >= 0)
+		// 	{printf("%d\n",s.a[s.top_a]);}
 		return(0);
-		for(int j = s.top_a;j>=0;j--)
-			{printf("%d\n",s.a[j]);}
 	}
 }
