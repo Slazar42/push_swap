@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 07:52:32 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/13 04:08:04 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/16 01:35:05 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,13 +98,13 @@ void *ft_atoiin(char *str,int *arr,int n)
 	if(n >= 0)
 		ft_atoiin(str,arr,n-1);
 }
-int i_in_stack(int nb,int *stack,int top)
+int indice_in_stack(int nb,int *stack)
 {
 	int i;
 	
 	i = 0;
 	while (nb != stack[i++]);
-	return(top - i);
+	return(i - 1);
 }
 void	ft_range(t_stacks	*s)
 {
@@ -112,11 +112,26 @@ void	ft_range(t_stacks	*s)
 	int indice;
 	int *sorted;
 	sorted = sorted_arr(s->a,s->top_a);
+		
 	if (s->top_a <= 100)
 		range = 15;
+		// int b =0;
+		// while (b <= s->top_a)
+		// {
+		// 	printf("%d\n",s->a[b]);
+		// 	b++;
+		// }
+		// exit (0);
+	// int i = 0;
+	// // while (i <= s->top_a)
+	// // {
+	// 	printf("%d\n", s->a[s->top_a + 2]);
+	// 	exit(0);
+	// }
 	while(s->top_a >= 0)
 	{
-		indice = i_in_stack(s->a[s->top_a],sorted,s->top_a);
+		indice =  indice_in_stack(s->a[s->top_a],sorted);
+		indice = s->top_a - indice;
 		if(indice < range)
 		{
 			pa(s);
@@ -130,21 +145,51 @@ void	ft_range(t_stacks	*s)
 		}
 		else if (indice > range)
 			ra(s);
+		// int i = 0;
+		// while (i <= s->top_a)
+		// {
+		// 	printf("======%d\n", s->a[i++]);
+		// }
 	}
-	int x; 
-	// printf("%d",s->top_b);
-	// exit(0);
+	int bigest ;
+	// int i = 0;
+	// while (i <= s->top_a)
+	// {
+	// 	printf("%d\n", s->a[i++]);
+	// }
 	while (s->top_b >= 0)
 	{
-		x = biggest(s->b,s->top_b);
-		printf("===========================%d\n",x);
-		if(x == 0)
-			pb(s);
-		else if(x < s->top_b / 2)
-			rrb(s);
-		else if(x > s->top_b / 2)
-			rb(s);
+		// printf("top b is %d..%d\n",biggest(s->b,s->top_b), s->top_b);
+		// else if(biggest(s->b,s->top_b)  == 0)
+		// 	rrb(s);
+		bigest = biggest(s->b,s->top_b);
+		// printf("biggest = %d, i_b = %d, top_a = %d\n", s->b[biggest(s->b,s->top_b)],biggest(s->b,s->top_b),s->b[s->top_b]);
+		if(s->b[bigest] == s->b[s->top_b])
+		{
+				pb(s);
+		}
+		rb(s);
+		// if (bigest < s->top_b / 2 && bigest != 0)
+		// 	rrb(s);
+		// else if (bigest >= s->top_b / 2 && bigest != 0)
+		// 	rb(s);
+		// 	exit(0);
+		// rrb(s);
+		// else if(biggest(s->b,s->top_b)  == 0)
+		// 	rrb(s);
 	}
+		// int i = 0;
+		// while (i <= s->top_a)
+		// {
+		// 	printf("======%d\n", s->a[i++]);
+		// }
+		// printf("%d", s->a[s->top_a]);
+	// int i = 0;
+	// while (i <= s->top_a)
+	// {
+	// 	printf("%d\n", s->a[i++]);
+	// }
+	// printf("%d", s->a[0]);
 }
 int main(int ac, char **av)
 {
@@ -166,24 +211,20 @@ int main(int ac, char **av)
 				all = ft_strjoin(all,av[i++]);
 			}
 		s.top_a = n-1;
-		s.a = malloc (n * sizeof(int));
-		s.b = malloc (n * sizeof(int));
+		s.a = calloc (n , sizeof(int));
+		s.b = calloc (n , sizeof(int));
 		ft_atoiin(all, s.a,n-1);
-		// printf("%d\n",i_in_stack(33,s.a,s.top_a));
-		// exit (0);
-		// sorted_arr(s.a,s.top_a);
 		if (sorted_or_not(&s))
 			exit(0);
 		if (s.top_a == 2)
 			sort_3(&s);
 		else if(s.top_a <= 4)
 			sort_5(&s);
-		// exit(0);
 		else if(s.top_a > 4)
 			ft_range(&s);
 		// printf("\n%d\n", s.top_a);
-		// while(s.top_a-- >= 0)
-		// 	{printf("%d\n",s.a[s.top_a]);}
+		// while(s.top_a >= 0)
+		// 	{printf("%d\n",s.a[s.top_a--]);}
 		return(0);
 	}
 }

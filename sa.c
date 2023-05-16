@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/13 04:09:36 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/16 02:32:52 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ void	rb(t_stacks *st)
 {
 	int tmp;
 	int k;
-	if(st->top_b > 1)
+	if(st->top_b >= 1)
 	{
 		k = st->top_b;
-		tmp = st->a[st->top_b];
+		tmp = st->b[st->top_b];
 		while (k > 0)
 		{
 			st->b[k]=st->b[k-1];
@@ -69,26 +69,27 @@ void	rb(t_stacks *st)
 		st->b[k] = tmp;
 		write(1, "rb\n", 3);
 	}
+	// write(1, "ss\n", 3);
 }
 
-void	pa(t_stacks *st)
+void	pb(t_stacks *st)
 {
 	if(st->top_a < 0)
 		return;
 	st->top_b += 1;
 	st->b[st->top_b] = st->a[st->top_a];
 	st->top_a -= 1;
-	write(1, "pa\n", 3);
+	write(1, "pb\n", 3);
 }
 
-void	pb(t_stacks *st)
+void	pa(t_stacks *st)
 {
 	if(st->top_b < 0)
 		return;
 	st->top_a += 1;
 	st->a[st->top_a] = st->b[st->top_b];
 	st->top_b -= 1;
-	write(1, "pb\n", 3);
+	write(1, "pa\n", 3);
 }
 
 void	rra(t_stacks *st)
@@ -111,7 +112,8 @@ void	rrb(t_stacks *st)
 {
 	int	tmp;
 	int	i;
-
+	if(st->top_b < 1)
+		return;
 	i = 0;
 	tmp = st->b[i];
 	while (i < st->top_b)
@@ -197,26 +199,35 @@ int *sorted_arr(int *arr,int top)
 {
 	int i;
 	int temp;
+	int *arr_copy;
+
+	arr_copy = malloc(sizeof(int) * top + 1);
+	i = top;
+	while (i >= 0)
+	{
+		arr_copy[i] = arr[i];
+		i--;
+	}
 	i = 0;
 	while(i <= top)
 	{
-		if(arr[i] < arr[i + 1])
+		if(arr_copy[i] < arr_copy[i + 1])
 		{
-			temp = arr[i];
-			arr[i] = arr[i + 1];
-			arr[i + 1] = temp;
+			temp = arr_copy[i];
+			arr_copy[i] = arr_copy[i + 1];
+			arr_copy[i + 1] = temp;
 			i = -1;
 		}
 		i++;
 	}
-	return(arr);
+	return(arr_copy);
 }
 
 // int 	biggest(int a)
 // {
 // 	static int big;
 // 	static int i;
-// 	if(!n)
+// 	if(!n) 
 // 		big = s->a[n];
 // 	if (s->a[n] > big)
 // 		{
@@ -232,16 +243,21 @@ int		smallest(int *a,int top)
 {
 	int small;
 	int i;
-		
+	int t;
+
 	i = 0;
+	t = 0;
 	small = a[i];
 	while (i <= top)
 	{
 		if (a[i] < small)
+		{
 			small = a[i];
-		i++;
+			i = t;
+		}
+		i++;	
 	}
-	return(i - top);
+	return (t);
 }
 
 int		biggest(int *a,int top)
@@ -252,10 +268,10 @@ int		biggest(int *a,int top)
 		
 	i = 0;
 	t = 0;
-	big = a[top];
+	big = a[0];
 	while (i <= top)
 	{
-		if (a[i] >= big)
+		if (a[i] > big)
 			{
 				big = a[i];
 				t = i;
@@ -264,7 +280,6 @@ int		biggest(int *a,int top)
 	}
 	return(t);
 }
-
 
 int sorted_or_not(t_stacks *s)
 {
@@ -283,45 +298,30 @@ void sort_3(t_stacks *s)
 {
 	if(biggest(s->a,s->top_a) == 1)
 		rra(s);
-	if(sorted_or_not(s))
-		exit(0);
-	else if ((biggest(s->a,s->top_a) == 0))
-	{
+	if(!sorted_or_not(s) && biggest(s->a,s->top_a) == 0)
 		sa(s);
-		exit(0);
-	}
 	if(biggest(s->a,s->top_a) == 2)
 		ra(s);
-	if(sorted_or_not(s))
-		exit(0);
-	else if (biggest(s->a,s->top_a) == 0)
-	{
+	if(!sorted_or_not(s) && biggest(s->a,s->top_a) == 0)
 		ra(s);
-		exit(0)	;		
-	}
-	sa(s);
-	exit(0);
+	if(!sorted_or_not(s) && biggest(s->a,s->top_a) == 2)
+		sa(s);
 }
 
 void	sort_5(t_stacks *s)
 {
-	while (s->top_a > 2)
-	{
-		if(smallest(s->a,s->top_a) <= s->top_a / 2)
-		{
-			while (s->top_a != smallest(s->a,s->top_a))
-				ra(s);
-		}
-		else if(smallest(s->a,s->top_a) > s->top_a / 2)
-		{
-			while (s->top_a != smallest(s->a,s->top_a))
-				rra(s);
-		}
-		pa(s);
-	}
-	sort_3(s);
-	while (s->top_b + 1)
+	while (smallest(s->a,s->top_a) != s->top_a && smallest(s->a,s->top_a) <= s->top_a / 2)
+		ra(s);
+	if(smallest(s->a,s->top_a) == s->top_a)
 		pb(s);
-
+	while (smallest(s->a,s->top_a) != s->top_a && smallest(s->a,s->top_a) > s->top_a / 2)
+		rra(s);
+	if(smallest(s->a,s->top_a) == s->top_a)
+		pb(s);
+	// printf("top_b : %d\n,",s->top_b);
+	if(!sorted_or_not(s))
+		sort_3(s);
+	while (s->top_b >= 0)
+		pa(s);
+	exit(0);
 }
-
