@@ -1,4 +1,10 @@
 {
     "42header.email": "slazar@student.42.fr",
-    "42header.username": "slazar"
+    "42header.username": "slazar",
+    "files.associations": {
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c"
+    }
 }

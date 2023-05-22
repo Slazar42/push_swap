@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/16 02:32:52 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/20 18:24:58 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,11 +134,11 @@ void	ss(t_stacks *st)
 		st->a[st->top_a ] = st->a[st->top_a -1];
 		st->a[st->top_a -1] = tmp;
 	}
-	if( st->top_a > 1)
+	if( st->top_b > 1)
 	{
-		tmp = st->a[st->top_a];
-		st->a[st->top_a ] = st->a[st->top_a -1];
-		st->a[st->top_a -1] = tmp;
+		tmp = st->a[st->top_b];
+		st->a[st->top_b ] = st->a[st->top_b -1];
+		st->a[st->top_b -1] = tmp;
 	}
 	write(1, "ss\n", 3);
 }
@@ -211,7 +211,7 @@ int *sorted_arr(int *arr,int top)
 	i = 0;
 	while(i <= top)
 	{
-		if(arr_copy[i] < arr_copy[i + 1])
+		if(arr_copy[i] > arr_copy[i + 1])
 		{
 			temp = arr_copy[i];
 			arr_copy[i] = arr_copy[i + 1];
@@ -222,22 +222,6 @@ int *sorted_arr(int *arr,int top)
 	}
 	return(arr_copy);
 }
-
-// int 	biggest(int a)
-// {
-// 	static int big;
-// 	static int i;
-// 	if(!n) 
-// 		big = s->a[n];
-// 	if (s->a[n] > big)
-// 		{
-// 			big = s->a[n];
-// 			i = n;
-// 		}
-// 	if(++n <= s->top_a )
-// 		biggest(s,n);
-// 	return(i);
-// }
 
 int		smallest(int *a,int top)
 {
@@ -253,7 +237,7 @@ int		smallest(int *a,int top)
 		if (a[i] < small)
 		{
 			small = a[i];
-			i = t;
+			t = i;
 		}
 		i++;	
 	}
@@ -281,18 +265,6 @@ int		biggest(int *a,int top)
 	return(t);
 }
 
-int sorted_or_not(t_stacks *s)
-{
-	int i;
-	i = 0;
-	while (i < s->top_a)
-	{
-		if(s->a[i] < s->a[i + 1])
-			return (0);
-		i++;
-	}
-	return(1);
-}
 	
 void sort_3(t_stacks *s)
 {
@@ -303,25 +275,25 @@ void sort_3(t_stacks *s)
 	if(biggest(s->a,s->top_a) == 2)
 		ra(s);
 	if(!sorted_or_not(s) && biggest(s->a,s->top_a) == 0)
-		ra(s);
+		sa(s);
 	if(!sorted_or_not(s) && biggest(s->a,s->top_a) == 2)
 		sa(s);
 }
 
 void	sort_5(t_stacks *s)
 {
-	while (smallest(s->a,s->top_a) != s->top_a && smallest(s->a,s->top_a) <= s->top_a / 2)
-		ra(s);
-	if(smallest(s->a,s->top_a) == s->top_a)
-		pb(s);
-	while (smallest(s->a,s->top_a) != s->top_a && smallest(s->a,s->top_a) > s->top_a / 2)
-		rra(s);
-	if(smallest(s->a,s->top_a) == s->top_a)
-		pb(s);
-	// printf("top_b : %d\n,",s->top_b);
+
+	while (s->top_a > 2)
+	{
+		if(smallest(s->a,s->top_a) == s->top_a)
+			pb(s);
+		else if (smallest(s->a,s->top_a) <= s->top_a / 2)
+			rra(s);
+		else if (smallest(s->a,s->top_a) > s->top_a / 2)
+			ra(s);
+	}
 	if(!sorted_or_not(s))
 		sort_3(s);
 	while (s->top_b >= 0)
 		pa(s);
-	exit(0);
 }

@@ -1,33 +1,19 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: slazar <slazar@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/04/17 07:41:13 by slazar            #+#    #+#              #
-#    Updated: 2023/04/17 07:44:10 by slazar           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-CC = cc
+
+
 CFLAGS = -Wall -Wextra -Werror -g
 SRCS = utiles.c \
-		pb.c \
 		sa.c \
-		sb.c \
-		ra.c \
-		rb.c \
-		ss.c \
-		rrr.c \
-		rra.c \
 		push_swap.c \
-		pa.c \
-		split.c \
+		
+SRCSB = utiles.c \
+		ra.c\
+		checker.c \
+
 
 OBJS    =    ${SRCS:.c=.o}
 OBJSB    =    ${SRCSB:.c=.o}
 NAME    =    push_swap
-NAMEBONUS	=
+NAMEBONUS	= checker
 RM    =    rm -rf
 
 %.o : %.c
