@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:05:35 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/20 23:49:40 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/22 07:51:21 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void readed_check(char *buffer,t_stacks *s)
 	else
 		ft_error();
 }
-void  do_instrac(t_stacks *s, char *buffer, int readed, int *i)
+void  do_instrac(t_stacks *s, char *buffer, int readed)
 {
 	s->check_size = s->top_a;	
-	i = 0;
+	s->i = 0;
 	if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'r')
 		rrr_b(s);
 	else if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'a')
@@ -51,22 +51,19 @@ int main(int ac,char **av)
 {
 	char	*buffer;
 	t_stacks s;
-	int 	readed = 1;
 	char	buf;
-	int 	i = 0;
 
 	if (ac > 1)
 	{
 		fill_stack(ac,av,&s);
 		buffer = malloc(sizeof(char) * 4);
-		while (readed)
+		while (s.readed)
 		{
-			readed = read(0,&buf,1);
-			buffer[i] = buf;
-			i++;
+			s.readed = read(0,&buf,1);
+			buffer[s.i++] = buf;
 			if (buf == '\n')
-				do_instrac(&s,buffer,readed,&i);
-		}	
+				do_instrac(&s,buffer,s.readed);
+		}
 		if (s.check_size != s.top_a)
 			write(1,"KO\n",3);
 		if(sorted_or_not(&s) && s.check_size == s.top_a)

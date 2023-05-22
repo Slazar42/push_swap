@@ -105,9 +105,12 @@ void fill_stack(int ac,char **av,t_stacks *s)
 {
 	char	*all= NULL;
 	int		i;
-
+	int n ;
+	
+	s->readed = 1;
+	s->i = 0;
+	n = 0;
 	i = 1;
-	int n = 0;
 	s->top_b = -1;
 	while (i < ac)
 	{
@@ -115,8 +118,8 @@ void fill_stack(int ac,char **av,t_stacks *s)
 		all = ft_strjoin(all,av[i++]);
 	}
 	s->top_a = n-1;
-	s->a = calloc (n , sizeof(int));
-	s->b = calloc (n , sizeof(int));
+	s->a = ft_calloc (n , sizeof(int));
+	s->b = ft_calloc (n , sizeof(int));
 	ft_atoiin(all, s->a,n-1);
 }
 
@@ -168,3 +171,4 @@ char	*ft_strjoin(char *s1, char *s2)
 	cnc[i] = 0;
 	return (cnc);
 }
+

@@ -12,6 +12,8 @@ typedef struct stacks
 	int	top_a;
 	int	top_b;
 	int check_size;
+	int readed;
+	int i;
 }	t_stacks;
 
 void sort_3(t_stacks *s);
@@ -22,7 +24,7 @@ char	*ft_strdup(char *s1);
 int *sorted_arr(int *arr,int top);
 char	*ft_calloc(int count, int size);
 char	*ft_strjoin(char *s1, char *s2);
-void do_instrac(t_stacks *s, char *buffer, int readed, int *i);
+void do_instrac(t_stacks *s, char *buffer, int readed);
 int		ft_strlen(char *c);
 int sorted_or_not(t_stacks *s);
 void	ft_check(char *str,int *n);
