@@ -25,24 +25,25 @@ int	ft_strlen(char *c)
 	}
 	return (i);
 }
-void ft_duplicated(int *arr,int n)
+void ft_duplicated(int *a,int top_a)
 {
 	static int size;
-	int i = n;
+	int i;
 
+	i = top_a;
 	if (size == 0)
-		size = n;
-
-	while (i < size && n >= 0)
+		size = top_a;
+	while (i < size && top_a >= 0)
 	{
-		if(arr[n] == arr[i+1])
+		if(a[top_a] == a[i+1])
 				ft_error();
 		i++;
 	}
 }
 
-void *ft_atoiin(char *str,int *arr,int n)
+void ft_atoiin(char *str,int *a,int top_a)
 {
+
 	static int i;
 	int sign ;
 	long res ;
@@ -59,24 +60,26 @@ void *ft_atoiin(char *str,int *arr,int n)
 		res = res * 10 + str[i++] - '0';
 	if(res *sign < -2147483648 || res *sign > 2147483647)
 		ft_error();
-	arr[n] = res * sign ;
-	ft_duplicated(arr,n);
-	if(n >= 0)
-		ft_atoiin(str,arr,n-1);
+	a[top_a] = res * sign ;
+	ft_duplicated(a,top_a);
+	if(top_a >= 0)
+		ft_atoiin(str,a,top_a - 1);
 }
+
 void	ft_check(char *str,int *n)
 {
 	int i;
+	static int nbr;
 
 	i=0;
-	static int nbr = 0;
+	nbr = 0;
 		if(!str[i])
 				return;
 		while (str[i] == ' ')
 			i++;
 		if(str[i] == '\0' && nbr == 0)
 			ft_error();		
-		if((str[i] == '-'  || str[i] == '+') && i++ && !(str[i] >= '0' && str[i] <= '9') || !str[i])
+		if(((str[i] == '-'  || str[i] == '+') && i++ && !(str[i] >= '0' && str[i] <= '9')) || str[i]== '\0')
 			ft_error();
 		while(str[i] >= '0' && str[i] <= '9')
 				{
@@ -103,12 +106,13 @@ int sorted_or_not(t_stacks *s)
 }
 void fill_stack(int ac,char **av,t_stacks *s)
 {
-	char	*all= NULL;
+	char	*all;
 	int		i;
 	int n ;
 	
 	s->readed = 1;
 	s->i = 0;
+	all= NULL;
 	n = 0;
 	i = 1;
 	s->top_b = -1;
@@ -118,33 +122,16 @@ void fill_stack(int ac,char **av,t_stacks *s)
 		all = ft_strjoin(all,av[i++]);
 	}
 	s->top_a = n-1;
-	s->a = ft_calloc (n , sizeof(int));
-	s->b = ft_calloc (n , sizeof(int));
-	ft_atoiin(all, s->a,n-1);
+	s->a = malloc (n * sizeof(int));
+	s->b = malloc (n * sizeof(int));
+	ft_atoiin(all, s->a,s->top_a);
+	free(all);
 }
-
 void ft_error()
 {
 	write(2,"Error\n",6);
 	exit(1);
 }
-char	*ft_calloc(int count, int size)
-{
-	char	*result;
-	int		i;
-
-	i = 0;
-	result = malloc(count * size);
-	if (!result)
-		return (0);
-	while (i < (count * size))
-	{
-		*(result + i) = 0;
-		i++;
-	}
-	return (result);
-}
-
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*cnc;

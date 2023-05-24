@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:33 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/19 16:41:22 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/24 00:50:47 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ra_b(t_stacks *st)
 {
 	int tmp;
 	int k;
-	if(st->top_a > 1)
+	if(st->top_a > 0)
 	{
 		k = st->top_a;
 		tmp = st->a[st->top_a];
@@ -54,7 +54,7 @@ void	rb_b(t_stacks *st)
 {
 	int tmp;
 	int k;
-	if(st->top_b >= 1)
+	if(st->top_b > 0)
 	{
 		k = st->top_b;
 		tmp = st->b[st->top_b];
@@ -120,14 +120,11 @@ void	rrb_b(t_stacks *st)
 void	ss_b(t_stacks *st)
 {
 	int	tmp;
-	if( st->top_a > 1)
+	if( st->top_a > 1 && st->top_b > 1)
 	{
 		tmp = st->a[st->top_a];
 		st->a[st->top_a ] = st->a[st->top_a -1];
 		st->a[st->top_a -1] = tmp;
-	}
-	if( st->top_b > 1)
-	{
 		tmp = st->a[st->top_b];
 		st->a[st->top_b ] = st->a[st->top_b -1];
 		st->a[st->top_b -1] = tmp;
@@ -168,19 +165,22 @@ void	rrr_b(t_stacks *st)
 	int	i;
 
 	i = 0;
-	tmp = st->a[i];
-	while (i < st->top_a)
+	if (st->top_a > 1 && st->top_b > 1)
 	{
-		st->a[i] = st->a[i + 1];
-		i++;
+		tmp = st->a[i];
+		while (i < st->top_a)
+		{
+			st->a[i] = st->a[i + 1];
+			i++;
+		}
+		st->a[i] = tmp;
+		i = 0;
+		tmp = st->b[i];
+		while (i < st->top_b)
+		{
+			st->b[i] = st->b[i + 1];
+			i++;
+		}
+		st->b[i] = tmp;
 	}
-	st->a[i] = tmp;
-	i = 0;
-	tmp = st->b[i];
-	while (i < st->top_b)
-	{
-		st->b[i] = st->b[i + 1];
-		i++;
-	}
-	st->b[i] = tmp;
 }

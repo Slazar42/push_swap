@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 09:09:56 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/20 18:24:58 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/24 00:11:57 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	rb(t_stacks *st)
 		st->b[k] = tmp;
 		write(1, "rb\n", 3);
 	}
-	// write(1, "ss\n", 3);
 }
 
 void	pb(t_stacks *st)
@@ -96,7 +95,8 @@ void	rra(t_stacks *st)
 {
 	int	tmp;
 	int	i;
-
+	if (st->top_a < 1)
+		return;
 	i = 0;
 	tmp = st->a[i];
 	while (i < st->top_a)

@@ -6,7 +6,7 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 07:52:32 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/20 17:39:10 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/22 21:30:14 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ int main(int ac, char **av)
 			sort_5(&s);
 		else if(s.top_a >= 5)
 			ft_range(&s);
-		if(sorted_or_not(&s));
+		if(sorted_or_not(&s))
 			exit(0);
 	}
 }

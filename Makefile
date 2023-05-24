@@ -1,6 +1,6 @@
 
 
-CFLAGS = -Wall -Wextra -Werror -g
+CFLAGS = -Wall -Wextra -Werror
 SRCS = utiles.c \
 		sa.c \
 		push_swap.c \
@@ -23,11 +23,11 @@ all: ${NAME}
 
 ${NAME}:    ${OBJS}
 			@echo "\033[0;32m"
-			${CC} push_swap.h ${CFLAGS} ${OBJS} -o ${NAME}
+			${CC} ${CFLAGS} ${OBJS} -o ${NAME}
 
 ${NAMEBONUS}:	${OBJSB}
 			@echo "\033[0;32m"
-			${CC} push_swap.h ${CFLAGS} ${OBJSB} -o ${NAMEBONUS}
+			${CC} ${CFLAGS} ${OBJSB} -o ${NAMEBONUS}
 
 bonus:     ${NAMEBONUS}
 
