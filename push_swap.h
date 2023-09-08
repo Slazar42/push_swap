@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/25 00:14:51 by slazar            #+#    #+#             */
+/*   Updated: 2023/05/26 21:00:27 by slazar           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct stacks
 {
@@ -11,23 +23,25 @@ typedef struct stacks
 	int	*b;
 	int	top_a;
 	int	top_b;
-	int readed;
-	int i;
-}	t_stacks;
+	int	check_size;
+	int	readed;
+	int	i;
+}		t_stacks;
 
-void sort_3(t_stacks *s);
-void sort_5(t_stacks *s);
-void ft_error();
-char    *ft_substr(char *s, unsigned int start, int len);
+void	sort_3(t_stacks *s);
+void	sort_5(t_stacks *s);
+void	ft_error(void);
+char	*ft_substr(char *s, unsigned int start, int len);
 char	*ft_strdup(char *s1);
-int *sorted_arr(int *arr,int top);
+int		*sorted_arr(int *arr, int top);
+char	*ft_calloc(int count, int size);
 char	*ft_strjoin(char *s1, char *s2);
-void do_instrac(t_stacks *s, char *buffer, int readed);
+void	do_instrac(t_stacks *s, char *buffer, int readed);
 int		ft_strlen(char *c);
-int sorted_or_not(t_stacks *s);
-void	ft_check(char *str,int *n);
-void ft_atoiin(char *str,int *arr,int n);
-void fill_stack(int ac,char **av,t_stacks *s);
+int		sorted_or_not(t_stacks *s);
+void	ft_check(char *str, int *n);
+void	ft_atoiin(char *str, int *arr, int n);
+void	fill_stack(int ac, char **av, t_stacks *s);
 void	ra(t_stacks *st);
 void	pa(t_stacks *st);
 void	sa(t_stacks *st);
@@ -50,7 +64,7 @@ void	pb_b(t_stacks *st);
 void	rrr_b(t_stacks *st);
 void	sb_b(t_stacks *st);
 void	ss_b(t_stacks *st);
-int		biggest(int *a,int top);
-int		smallest(int *a,int top);
+int		biggest(int *a, int top);
+int		smallest(int *a, int top);
 
 #endif

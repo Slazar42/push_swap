@@ -1,12 +1,19 @@
 
-
-CFLAGS = -Wall -Wextra -Werror
-SRCS = utiles.c \
-		sa.c \
+CFLAGS = -Wall -Wextra -Werror -fsanitize=address -g3
+SRCS = utiles1.c \
+		utiles2.c \
+		utiles3.c \
+		instractions_mandatory1.c\
+		instractions_mandatory2.c\
+		instractions_mandatory3.c\
 		push_swap.c \
 		
-SRCSB = utiles.c \
-		ra.c\
+SRCSB = utiles1.c \
+		utiles2.c \
+		utiles3.c \
+		instractions_bonus1.c\
+		instractions_bonus2.c\
+		instractions_bonus3.c\
 		checker.c \
 
 

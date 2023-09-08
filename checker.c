@@ -6,99 +6,85 @@
 /*   By: slazar <slazar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/19 17:05:35 by slazar            #+#    #+#             */
-/*   Updated: 2023/05/24 01:56:17 by slazar           ###   ########.fr       */
+/*   Updated: 2023/05/27 20:47:59 by slazar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void readed_check(char *buffer,t_stacks *s)
+void	readed_check(char *buffer, t_stacks *s)
 {
-	if (buffer[0] == 'r' && buffer[1] == 'r')
+	if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == '\n')
 		rr_b(s);
-	else if (buffer[0] == 'r' && buffer[1] == 'a')
+	else if (buffer[0] == 'r' && buffer[1] == 'a' && buffer[2] == '\n')
 		ra_b(s);
-	else if (buffer[0] == 'r' && buffer[1] == 'b')
+	else if (buffer[0] == 'r' && buffer[1] == 'b' && buffer[2] == '\n')
 		rb_b(s);
-	else if (buffer[0] == 's' && buffer[1] == 'a')
+	else if (buffer[0] == 's' && buffer[1] == 'a' && buffer[2] == '\n')
 		sa_b(s);
-	else if (buffer[0] == 's' && buffer[1] == 'b')
+	else if (buffer[0] == 's' && buffer[1] == 'b' && buffer[2] == '\n')
 		sb_b(s);
-	else if (buffer[0] == 's' && buffer[1] == 's')
+	else if (buffer[0] == 's' && buffer[1] == 's' && buffer[2] == '\n')
 		ss_b(s);
-	else if (buffer[0] == 'p' && buffer[1] == 'a')
+	else if (buffer[0] == 'p' && buffer[1] == 'a' && buffer[2] == '\n')
 		pa_b(s);
-	else if (buffer[0] == 'p' && buffer[1] == 'b')
+	else if (buffer[0] == 'p' && buffer[1] == 'b' && buffer[2] == '\n')
 		pb_b(s);
 	else
 		ft_error();
 }
-void  do_instrac(t_stacks *s, char *buffer, int readed)
+
+void	do_instrac(t_stacks *s, char *buffer, int readed)
 {
-	if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'r')
+	s->check_size = s->top_a;
+	s->i = 0;
+	if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'r'
+		&& buffer[3] == '\n')
 		rrr_b(s);
-	else if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'a')
+	else if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'a'
+		&& buffer[3] == '\n')
 		rra_b(s);
-	else if ( buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'b')
+	else if (buffer[0] == 'r' && buffer[1] == 'r' && buffer[2] == 'b'
+		&& buffer[3] == '\n')
 		rrb_b(s);
 	else if (readed)
-		readed_check(buffer,s);
-	}
-
-void ok_ko(char c,t_stacks *s)
-{
-	if (c == 'k')
-	{
-		write(1,"KO\n",3);
-		// free(s->a);
-		// free(s->b);
-	}
-	else if (c == 'o')
-	{
-		write(1,"OK\n",3);
-		// free(s->a);
-		// free(s->b);
-	}
+		readed_check(buffer, s);
 }
-int main(int ac,char **av)
+
+void	ok_ko(char c, t_stacks *s)
 {
-	char	*buffer;
-	t_stacks s;
-	char	buf;
-	int	old_top_a;
+	if (c == 'o')
+		write(1, "OK\n", 3);
+	else if (c == 'k')
+		write(1, "KO\n", 3);
+	free(s->a);
+	free(s->b);
+	exit(0);
+}
+
+int	main(int ac, char **av)
+{
+	char		buffer[5];
+	t_stacks	s;
+	char		buf;
+
 	if (ac > 1)
 	{
-		fill_stack(ac,av,&s);
-		old_top_a = s.top_a;
-		buffer = calloc(sizeof(char) , 4);
-		// printf("a[s.top_a] = %d\n",s.a[s.top_a]);
-		// rra_b(&s);
-		// for(int i  = 0; i <= s.top_a;)
-		// 	printf("|%d|\n",s.a[i++]);
-		// exit(0);
-		
-		buffer[3] = '\0';
+		fill_stack(ac, av, &s);
 		while (s.readed)
 		{
-			s.readed = read(0,&buffer[s.i],1);
-			// buffer[s.i++] = buf;
-			
-			if (buffer[s.i] == '\n')
-				do_instrac(&s,buffer,s.readed);
-			// else if (!(s.readed == 3 || s.readed == 4))
-			// 	ft_error();
-			s.i++;
+			s.readed = read(0, &buf, 1);
+			buffer[s.i++] = buf;
+			if (buf == '\n')
+			{
+				buffer[s.i] = '\0';
+				do_instrac(&s, buffer, s.readed);
+			}
 		}
-		free(buffer);
-		// printf("top_a = %d\n",s.top_a);
-		// printf("old_top_a = %d\n",old_top_a);
-		if (old_top_a != s.top_a)
-			ok_ko('k',&s);
-		if (sorted_or_not(&s) && old_top_a == s.top_a)
-			ok_ko('o',&s);
-		else if(!sorted_or_not(&s) && old_top_a == s.top_a)
-			ok_ko('k',&s);
-		printf("a[s.top_a] = %d\n",s.a[s.top_a]);
+		if (sorted_or_not(&s) && s.top_b == -1)
+			ok_ko('o', &s);
+		else if (!sorted_or_not(&s) || s.top_b != -1)
+			ok_ko('k', &s);
 	}
 	return (0);
 }
